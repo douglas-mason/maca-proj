@@ -1,0 +1,26 @@
+body {
+  padding: 30px 95px;
+  margin: 0;
+  font-family: Helvetica;
+  font-size: 18px;
+  font-weight: normal;
+  color: #ffffff;
+  background: #000408;
+}
+@media (max-width: 600px) {
+  body {
+    padding: 30px;
+  }
+}
+
+body h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+body h1 {
+  font-family: Helvetica;
+  font-size: 48px;
+  font-weight: bold;
+  color: #ffffff;
+}
