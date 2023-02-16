@@ -5,7 +5,13 @@
 
 ### Running locally
 
-Run `yarn install` then `yarn start`
+Run
+
+```bash
+$ nvm use
+$ yarn install
+$ yarn start
+```
 
 To view storybook locally, run `yarn storybook`
 
