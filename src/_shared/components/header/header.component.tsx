@@ -1,35 +1,78 @@
 import React from "react";
 import HomeLogo from "../../../assets/home_logo.png";
-import {
-  headerContainerStyles,
-  headerFavoritesButtonStyles,
-  headerHomeLogoButtonStyles,
-} from "./header.styles";
-import { Link, useRouteMatch } from "react-router-dom";
+import { headerHomeLogoButtonStyles } from "./header.styles";
+import { useRouteMatch } from "react-router-dom";
+import { Menu, MenuItem, ResponsiveMenuItem } from "../menu/menu.component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faList } from "@fortawesome/free-solid-svg-icons";
+
+const heartIcon = <FontAwesomeIcon icon={faHeart} />;
+const listIcon = <FontAwesomeIcon icon={faList} />;
+
+const menuItems = [
+  {
+    content: (
+      <img
+        className={headerHomeLogoButtonStyles}
+        src={HomeLogo}
+        alt="Home Logo"
+      />
+    ),
+    description: "Go to home",
+    navigateUrl: "/",
+  },
+  {
+    content: (
+      <ResponsiveMenuItem
+        primaryContent="Favorites"
+        secondaryContent={heartIcon}
+      />
+    ),
+    description: "Go to favorites",
+    navigateUrl: "/favorites",
+  },
+  {
+    content: (
+      <ResponsiveMenuItem primaryContent="Browse" secondaryContent={listIcon} />
+    ),
+    description: "Go to list",
+    navigateUrl: "/list",
+  },
+  {
+    content: "Profile",
+    description: "Go to your profile",
+    navigateUrl: "/profile",
+    showInList: true,
+  },
+  {
+    content: "Community",
+    description: "Go to the community",
+    navigateUrl: "/community",
+    showInList: true,
+  },
+  {
+    content: "About Us",
+    description: "Go to about us page",
+    navigateUrl: "/about-us",
+    showInList: true,
+  },
+  {
+    content: "Settings",
+    description: "Go to settings",
+    navigateUrl: "/settings",
+    showInList: true,
+  },
+];
 
 export const Header: React.FC = () => {
   const { path } = useRouteMatch();
-  const showFavoritesLink = path !== "/favorites";
+
   return (
-    <nav className={headerContainerStyles}>
-      <Link
-        tabIndex={0}
-        to="/"
-        className={headerHomeLogoButtonStyles}
-        aria-roledescription="Navigate Home"
-      >
-        <img src={HomeLogo} alt="Home Logo" />
-      </Link>
-      {showFavoritesLink && (
-        <Link
-          tabIndex={1}
-          to="/favorites"
-          className={headerFavoritesButtonStyles}
-          aria-roledescription="Navigate to favorites"
-        >
-          View Favorites
-        </Link>
-      )}
-    </nav>
+    <Menu
+      items={menuItems.map<MenuItem>((item) => ({
+        ...item,
+        isActive: path === item.navigateUrl,
+      }))}
+    />
   );
 };

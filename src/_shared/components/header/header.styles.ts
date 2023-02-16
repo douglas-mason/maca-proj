@@ -11,6 +11,9 @@ export const headerHomeLogoButtonStyles = css({
   background: "none",
   border: "none",
   cursor: "pointer",
+  ":hover": {
+    rotate: "15deg",
+  },
 });
 
 export const headerFavoritesButtonStyles = css({
