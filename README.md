@@ -20,3 +20,5 @@ $ yarn start
 To view storybook locally, run `yarn storybook`
 
 To run tests, run `yarn test`
+
+Read more about the project [here](WRITEUP.md)
