@@ -16,6 +16,7 @@ import {
   starshipFavoriteButtonStyles,
 } from "./starship-card.styles";
 import { useEffect } from "react";
+import { Card, CardBody, CardFooter } from "../card/card.component";
 
 interface Props {
   isFavorite?: boolean;
@@ -60,44 +61,50 @@ export const StarshipCard: React.FC<Props> = ({
   };
 
   return (
-    <div className={starshipCardStyles}>
-      <div className={starshipCardInfoContainerStyles}>
-        <div>
-          <h2>{starship.name}</h2>
-          <div className={starshipCardManufacturerStyles}>
-            {starship.manufacturer}
+    <Card>
+      <CardBody>
+        <div className={starshipCardStyles}>
+          <div className={starshipCardInfoContainerStyles}>
+            <div>
+              <h2>{starship.name}</h2>
+              <div className={starshipCardManufacturerStyles}>
+                {starship.manufacturer}
+              </div>
+              <div className={starshipCardRatingContainerStyles}>
+                {getStars(Number(starship.hyperdrive_rating))}
+              </div>
+              <div>Passengers: {starship.passengers}</div>
+            </div>
+            <div className={starshipCardImageStyles}>
+              <img alt="Stock Starship" src={StarshipImg} />
+            </div>
+            <div className={starshipCardHeartImageStyles}>
+              <button
+                aria-roledescription="Toggle Favorite"
+                onClick={onFavoriteClick}
+                className={starshipFavoriteButtonStyles}
+              >
+                <img
+                  src={isFavorite ? FullHeardImg : EmptyHeartImg}
+                  alt={isFavorite ? "Favorite" : "Not Favorite"}
+                />
+              </button>
+            </div>
           </div>
-          <div className={starshipCardRatingContainerStyles}>
-            {getStars(Number(starship.hyperdrive_rating))}
-          </div>
-          <div>Passengers: {starship.passengers}</div>
         </div>
-        <div className={starshipCardImageStyles}>
-          <img alt="Stock Starship" src={StarshipImg} />
-        </div>
-        <div className={starshipCardHeartImageStyles}>
-          <button
-            aria-roledescription="Toggle Favorite"
-            onClick={onFavoriteClick}
-            className={starshipFavoriteButtonStyles}
-          >
-            <img
-              src={isFavorite ? FullHeardImg : EmptyHeartImg}
-              alt={isFavorite ? "Favorite" : "Not Favorite"}
+      </CardBody>
+      <CardFooter>
+        {showNotes && (
+          <div className={starshipCardNotesContainer}>
+            <textarea
+              aria-roledescription="Personal notes"
+              value={notes}
+              onChange={onNoteChange}
+              placeholder="Add text"
             />
-          </button>
-        </div>
-      </div>
-      {showNotes && (
-        <div className={starshipCardNotesContainer}>
-          <textarea
-            aria-roledescription="Personal notes"
-            value={notes}
-            onChange={onNoteChange}
-            placeholder="Add text"
-          />
-        </div>
-      )}
-    </div>
+          </div>
+        )}
+      </CardFooter>
+    </Card>
   );
 };
